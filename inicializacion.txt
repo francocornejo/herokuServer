@@ -1,0 +1,86 @@
+#Instalaciones de las dependecias a utilizar en el proceso de inicializacion de los servidores:
+
+    npm i express nodemon
+    npm i pm2 -g 
+    npm i forever -g
+    #Instalacion y configuracion de nginx ("http://nginx.org/en/download.html")
+    
+#Para iniciar el servidor con nodemon: 
+    npm start 
+
+#Iniciamos servidores con pm2 en fork y/o en cluster
+
+    PM2:
+
+        Modo fork:
+            pm2 start index.js -- -- 8081 fork
+            pm2 start index-2-1.js -- -- 8082 fork
+            pm2 start index-2-2.js -- -- 8083 fork
+            pm2 start index-2-3.js -- -- 8084 fork
+            pm2 start index-2-4.js -- -- 8085 fork
+
+        Modo cluster:
+            pm2 start index.js -i max
+
+#Para visualizar los procesos con PM2 emplear:
+    pm2 list
+
+#Para matar los procesos usar:
+    pm2 kill
+    pm2 delete <pid>
+
+#Mediante el comando "tasklist", corroboramos que los procesos de los servidores (fork, cluster) se visualicen en la lista.
+
+#A continuación iniciaremos lo servidores con el comando "forever":
+
+    FOREVER:
+        forever start index.js
+        forever start index-2-1.js
+        forever start index-2-2.js
+        forever start index-2-3.js
+        forever start index-2-4.js
+
+#Mediante el comando " forever list " podemos visualizar los procesos activos relacionados con forever.
+
+#Para poder distinguir los procesos activos mediante sistema operativo, emplear el comando " ps ".
+
+#Para matar procesos de forever emplear:
+    forever stopall
+    forever stop <pid>
+
+#NGINX:
+
+La configuracion del archivo nginx.conf es la siguiente: 
+
+events {
+}
+
+http {
+    include mime.types;
+    default_type application/octet-stream;
+
+    upstream node_app_cluster {
+        server 127.0.0.1:8082;
+        server 127.0.0.1:8083;
+        server 127.0.0.1:8084;
+        server 127.0.0.1:8085;
+    }
+
+    upstream node_app {
+        server 127.0.0.1:8081;
+    }
+
+    server {
+        listen 80;
+        server_name nginx_node;
+        root C:\Users\Fran\Desktop\Estudios\nginx-node\nodeServer\views;
+
+        location /api/randoms {
+            proxy_pass http://node_app_cluster;
+        }
+
+        location / {
+            proxy_pass http://node_app;
+        }
+    }
+}

@@ -1,0 +1,10 @@
+[2022-09-08T00:22:51.429Z] - warn : Método GET URL /info123 inexistente
+[2022-09-08T00:26:16.632Z] - warn : Método GET URL /info123 inexistente
+[2022-09-08T00:33:05.766Z] - error : Error al buscar la informacion del sistema:  portt is not defined
+[2022-09-08T00:42:00.145Z] - warn : Método GET URL /random inexistente
+[2022-09-08T00:42:16.560Z] - warn : Método GET URL /api/random inexistente
+[2022-09-08T00:42:20.602Z] - warn : Método GET URL /api/randoms inexistente
+[2022-09-08T00:42:55.936Z] - warn : Método GET URL /api/random/datos inexistente
+[2022-09-08T00:43:01.427Z] - warn : Método GET URL /api/randoms/datos inexistente
+[2022-09-08T00:44:12.453Z] - warn : Método GET URL /api/randoms/datos inexistente
+[2022-09-08T00:45:38.085Z] - warn : Método GET URL /api/randoms inexistente
