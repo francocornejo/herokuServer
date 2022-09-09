@@ -136,6 +136,7 @@ res.send("<h1>Ruta protegida!</h1>");
 });
 
 app.get("/info", (req, res) => {
+    const repetirMensaje = ('Buenos dias !!!').repeat(1000)
     try {
         res.send(`
             <h1>Informacion relevante: </h1>
@@ -156,10 +157,35 @@ app.get("/info", (req, res) => {
     } catch (error) {
         logger.error('Error al buscar la informacion del sistema: ', error)
     }
-    
+})
+
+app.get("/info-bloq", (req, res) => {
+    try {
+        const info = `
+        <h1>Informacion relevante: </h1>
+        <ul>
+            <li>Argumentos de entrada: ${port}</li>
+            <li>Nombre de la plataforma: ${process.platform}</li>
+            <li>Version de Node: ${process.version}</li>
+            <li>Memoria total reservada: ${util.inspect(process.memoryUsage(),{
+                showHidden: false,
+                depth: null,
+                colors: true
+            })}</li>
+            <li>Path de ejecucion: ${process.execPath}</li>
+            <li>Process ID: ${process.pid}</li>
+            <li>Carpeta del proyecto: ${process.cwd()}</li>
+            <li>Numero de procesadores: ${os.cpus().length}</li>
+        </ul>`
+        console.log(info)
+        res.send(info)
+    } catch (error) {
+        logger.error('Error al buscar la informacion del sistema: ', error)
+    }
 })
 
 app.get("/infoGzip", compression(), (req, res) => {
+    const repetirMensaje = ('Buenos dias !!!').repeat(1000)
     res.send(`
     <h1>Informacion relevante: </h1>
     <ul>

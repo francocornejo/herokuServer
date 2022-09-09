@@ -4,13 +4,14 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "test": "node benchmark.js",
+    "start": "0x index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "autocannon": "^7.9.0",
     "bcrypt": "^5.0.1",
     "compression": "^1.7.4",
     "dotenv": "^16.0.1",
